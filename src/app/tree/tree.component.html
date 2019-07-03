@@ -1,0 +1,29 @@
+<header>
+  <button (click)="onRemoveSelection()">REMOVE</button>
+  <hr />
+</header>
+<ng-template #nodeTemplate let-node="node" let-onCollapseExpand="onCollapseExpand"
+  let-onCheckedChange="onCheckedChange">
+  <div class="node-row">
+    <div class="expand-icon" *ngIf="node.hasChildren()">
+      <span [hidden]="node.collapsed" (click)="onCollapseExpand(node)">
+        <img class="expand" />
+      </span>
+      <span [hidden]="!node.collapsed" (click)="onCollapseExpand(node)">
+        <img class="collapse" />
+      </span>
+    </div>
+    <div>
+      <input class="node-check" type="checkbox" [(ngModel)]="node.checked" (ngModelChange)="onCheckedChange()" />
+      <label (click)="node.checked = !node.checked; onCheckedChange()">
+        {{node.title}}
+      </label>
+      <input [type]="node.internalType" [(ngModel)]="node.value" />
+    </div>
+  </div>
+</ng-template>
+<div class="treeview-container">
+  <app-tree-node class="row" *ngFor="let node of nodes" [node]="node" [template]="nodeTemplate"
+    (checkedChange)="onCheckedChange()">
+  </app-tree-node>
+</div>

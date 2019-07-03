@@ -1,0 +1,11 @@
+:host {
+  display: block;
+
+  .tree-node {
+    white-space: nowrap;
+
+    .tree-node {
+      margin-left: 3rem;
+    }
+  }
+}
