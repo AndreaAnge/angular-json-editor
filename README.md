@@ -8,7 +8,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Setup and installation
 
-Clone the reository and run development server.
+Clone the repository and run development server from root project folder using any command line interface (e.g. Command Prompt on Windows).
 
 ## Development server
 
