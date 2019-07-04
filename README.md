@@ -1,4 +1,4 @@
-Angular Json Editor (wrapper for jsoneditor). View/Edit Json file with formatting.
+Angular Json Viewer/Editor.
 
 Working with latest Angular 8.
 
