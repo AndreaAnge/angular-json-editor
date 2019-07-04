@@ -24,6 +24,4 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
 ## Features
 1. Checkbox selection - user can select/check any tree node. Child nodes are coupled with parent meaning if all child nodes are selected,   parent node will be selected as well. 
-2. Delete selected nodes - after nodes are marked/checked for deletion, user can click REMOVE button to delete nodes from tree.
-  If all children of a parent node are being removed, parent node will be removed as well.
- 
+2. Remove selected nodes - after nodes are marked/checked (for deletion), user can click REMOVE button to remove nodes from tree. 
