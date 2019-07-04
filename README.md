@@ -15,7 +15,7 @@ Clone the repository and run development server from root project folder using a
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
 ## Project structure
-`src` - contains all application files
+`/src` - contains all application files
   - `/tree` - Tree module is located here
   - `/demo` - Demo application demonstrating Tree Viewwer/Editor
  
