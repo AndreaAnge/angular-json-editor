@@ -19,9 +19,9 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
 ## Project structure
 `/src` - source folder, has the general Angular CLI project structure.<br/>
-`/app` - contains AppComponent along with the following subfolders:
-  - `/tree` - TreeModule and related components, models, etc..
-  - `/demo` - DemoModule (imports TreeModule) with DemoComponent demonstrating Tree View/Editor.
+  `/app` - contains AppComponent along with the following subfolders:
+    - `/tree` - TreeModule and related components, models, etc..
+    - `/demo` - DemoModule (imports TreeModule) with DemoComponent demonstrating Tree View/Editor.
 
 ## Features
 1. Checkbox selection - user can select/check any tree node. Child nodes are coupled with parent meaning if all child nodes are selected,   parent node will be selected as well. 
