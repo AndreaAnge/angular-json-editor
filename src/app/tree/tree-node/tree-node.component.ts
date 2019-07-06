@@ -13,8 +13,7 @@ export class TreeNodeComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   onCollapseExpand = () => {
     this.node.collapsed = !this.node.collapsed;
@@ -26,28 +25,6 @@ export class TreeNodeComponent implements OnInit {
       this.node.children.forEach(child => child.setCheckedRecursive(checked));
     }
     this.checkedChange.emit(checked);
-  }
-
-  onChildCheckedChange() {
-    let itemChecked: boolean = null;
-    for (const child of this.node.children) {
-      if (itemChecked === null) {
-        itemChecked = child.checked;
-      } else if (itemChecked !== child.checked) {
-        itemChecked = undefined;
-        break;
-      }
-    }
-
-    if (itemChecked === null) {
-      itemChecked = false;
-    }
-
-    if (this.node.checked !== itemChecked) {
-      this.node.checked = itemChecked;
-    }
-
-    this.checkedChange.emit(itemChecked);
   }
 }
 

@@ -9,7 +9,7 @@ import { TreeNode } from './tree-node/tree-node';
 export class TreeComponent implements OnInit {
   @Input() source: { [key: string]: object | string | number | boolean | Array<object | string | number | boolean> };
 
-  @Output() selectedChange = new EventEmitter<TreeNode>();
+  @Output() checkedChange = new EventEmitter<any>();
   @Output() removedSelected = new EventEmitter<TreeNode[]>();
 
   nodes: TreeNode[];
@@ -26,7 +26,7 @@ export class TreeComponent implements OnInit {
   }
 
   onCheckedChange = (node, checked) => {
-    this.selectedChange.emit(checked);
+    this.checkedChange.emit(node);
   }
 
   onRemoveSelection = () => {
@@ -36,7 +36,7 @@ export class TreeComponent implements OnInit {
       } else if (node.hasChildren()) {
         this.deleteRecursive(node);
       }
-    })
+    });
   }
 
   private deleteRecursive(node: TreeNode) {

@@ -1,4 +1,8 @@
 :host {
+
+  font-family: arial,sans-serif;
+  font-size: 11pt;
+
   .expand-icon {
     cursor: pointer;
     float: left;
@@ -21,6 +25,8 @@
 }
 
 .treeview-container {
-  overflow-y: auto;
+  overflow-y: scroll;
   padding: .3rem;
-}
+  height: 100%;
+  width: 100%;
+  border: 1px grey;}

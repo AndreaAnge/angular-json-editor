@@ -14,8 +14,8 @@
       </span>
     </div>
     <div>
-      <input type="checkbox" [(ngModel)]="node.checked" (ngModelChange)="onCheckedChange()" [ngStyle]="!node.hasChildren() && {'margin-left': '2.0625rem'}"/>
-      <label (click)="node.checked = !node.checked; onCheckedChange()">
+      <input type="checkbox" [(ngModel)]="node.checked" (ngModelChange)="onCheckedChange(node, $event)" [ngStyle]="!node.hasChildren() && {'margin-left': '2.0625rem'}"/>
+      <label (click)="node.checked = !node.checked; onCheckedChange(node, $event)">
         {{node.title}}
       </label>
       <input [type]="node.internalType" [(ngModel)]="node.value" />
@@ -24,6 +24,6 @@
 </ng-template>
 <div class="treeview-container">
   <app-tree-node *ngFor="let node of nodes" [node]="node" [template]="nodeTemplate"
-    (checkedChange)="onCheckedChange()">
+    (checkedChange)="onCheckedChange(node, $event)">
   </app-tree-node>
 </div>
