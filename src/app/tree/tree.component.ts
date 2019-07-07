@@ -35,7 +35,7 @@ export class TreeComponent implements OnInit {
 
   onRemoveSelection = () => {
     this.nodes.forEach((node, index) => {
-      if (node.checked && node.isLeaf()) {
+      if (node.checked) {
         this.nodes.splice(index, 1);
       } else {
         this.deleteRecursive(node);
@@ -45,11 +45,14 @@ export class TreeComponent implements OnInit {
 
   private deleteRecursive(node: TreeNode) {
     if (!node.isLeaf()) {
-      node.children.forEach((child, index) => {
-        if (child.checked) {
-          node.children.splice(index, 1);
-        } else { this.deleteRecursive(child); }
-      });
+      node.children.reduceRight<TreeNode[]>(
+        (accumulator, child, index, object) => {
+          if (child.checked) {
+            object.splice(index, 1);
+          } else { this.deleteRecursive(child); }
+
+          return accumulator.concat(child);
+        }, []);
     }
   }
 
