@@ -1,8 +1,10 @@
 <div *ngIf="node" class="tree-node">
-    <ng-template [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{node: node, onCollapseExpand: onCollapseExpand, onCheckedChange: onCheckedChange}">
-    </ng-template>
-    <div *ngIf="node.collapsed">
-        <app-tree-node *ngFor="let child of node.children" [node]="child" [template]="template" (onCheckedChange)="onCheckedChange()">
-        </app-tree-node>
-    </div>
+  <ng-template [ngTemplateOutlet]="template"
+    [ngTemplateOutletContext]="{node: node, onCollapseExpand: onCollapseExpand, onCheckedChange: onCheckedChange}">
+  </ng-template>
+  <div *ngIf="node.collapsed">
+    <app-tree-node *ngFor="let child of node.children" [node]="child" [template]="template"
+      (onCheckedChange)="onCheckedChange(child, $event)">
+    </app-tree-node>
+  </div>
 </div>

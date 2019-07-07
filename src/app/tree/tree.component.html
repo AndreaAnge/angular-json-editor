@@ -1,11 +1,8 @@
-<header>
-  <button (click)="onRemoveSelection()">REMOVE</button>
-  <hr />
-</header>
 <ng-template #nodeTemplate let-node="node" let-onCollapseExpand="onCollapseExpand"
   let-onCheckedChange="onCheckedChange">
   <div class="tree-row">
-    <div class="expand-icon" *ngIf="node.hasChildren()">
+    <input type="checkbox" [(ngModel)]="node.checked" (ngModelChange)="onCheckedChange(node, $event)" />
+    <div class="expand-icon" *ngIf="!node.isLeaf()">
       <span [hidden]="node.collapsed" (click)="onCollapseExpand(node)">
         <img class="expand" />
       </span>
@@ -13,16 +10,19 @@
         <img class="collapse" />
       </span>
     </div>
-    <div>
-      <input type="checkbox" [(ngModel)]="node.checked" (ngModelChange)="onCheckedChange(node, $event)" [ngStyle]="!node.hasChildren() && {'margin-left': '2.0625rem'}"/>
-      <label (click)="node.checked = !node.checked; onCheckedChange(node, $event)">
-        {{node.title}}
+    <div [ngStyle]="node.isLeaf() && {'margin-left': '56.6px'}">
+      <label class="tree-label" (click)="node.checked = !node.checked; onCheckedChange(node, $event)">
+        {{node.id}}
       </label>
-      <input [type]="node.internalType" [(ngModel)]="node.value" />
+      <input *ngIf="node.isLeaf()" [type]="node.internalType" [(ngModel)]="node.value" />
     </div>
+    <div *ngIf="!node.isLeaf() && node.children <= 0 && node.collapsed">{{emptyObjectText}}</div>
   </div>
 </ng-template>
-<div class="treeview-container">
+<div class="tree-container">
+  <div class="tree-header">
+    <button class="remove-btn" (click)="onRemoveSelection()">REMOVE</button>
+  </div>
   <app-tree-node *ngFor="let node of nodes" [node]="node" [template]="nodeTemplate"
     (checkedChange)="onCheckedChange(node, $event)">
   </app-tree-node>

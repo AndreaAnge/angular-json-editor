@@ -1,9 +1,9 @@
 export class TreeNode {
     type: string;
-    title: string;
+    id: string;
     value: any;
     checked: boolean;
-    collapsed?: boolean;
+    collapsed: boolean;
     children?: TreeNode[];
 
     constructor() {
@@ -11,13 +11,13 @@ export class TreeNode {
         this.collapsed = false;
     }
 
-    hasChildren(): boolean {
-        return this.children && this.children.length > 0;
+    isLeaf(): boolean {
+        return !this.children;
     }
 
     setCheckedRecursive(checked: boolean): void {
         this.checked = checked;
-        if (this.hasChildren()) {
+        if (!this.isLeaf()) {
             this.children.forEach(child => child.setCheckedRecursive(checked));
         }
     }
@@ -30,6 +30,8 @@ export class TreeNode {
                 return 'number';
             case 'string':
                 return 'text';
+            default:
+                return null;
         }
     }
 }

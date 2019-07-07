@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { TreeNode } from './tree-node/tree-node';
+import { isObject, isPrimitive } from 'util';
 
 @Component({
   selector: 'app-tree',
@@ -10,12 +11,15 @@ export class TreeComponent implements OnInit {
   @Input() source: { [key: string]: object | string | number | boolean | Array<object | string | number | boolean> };
 
   @Output() checkedChange = new EventEmitter<any>();
-  @Output() removedSelected = new EventEmitter<TreeNode[]>();
+  @Output() removedSelected = new EventEmitter<TreeNode | TreeNode[]>();
 
   nodes: TreeNode[];
 
-  constructor() {
+  get emptyObjectText() {
+    return '(object is empty)';
   }
+
+  constructor() { }
 
   ngOnInit() {
     this.nodes = this.buildTreeView(this.source);
@@ -31,16 +35,16 @@ export class TreeComponent implements OnInit {
 
   onRemoveSelection = () => {
     this.nodes.forEach((node, index) => {
-      if (node.checked) {
+      if (node.checked && node.isLeaf()) {
         this.nodes.splice(index, 1);
-      } else if (node.hasChildren()) {
+      } else {
         this.deleteRecursive(node);
       }
     });
   }
 
   private deleteRecursive(node: TreeNode) {
-    if (node.hasChildren()) {
+    if (!node.isLeaf()) {
       node.children.forEach((child, index) => {
         if (child.checked) {
           node.children.splice(index, 1);
@@ -54,15 +58,14 @@ export class TreeComponent implements OnInit {
       (accumulator, key) => {
         const value = jsonObj[key];
         const node = new TreeNode();
-        node.title = key;
+        node.id = key;
 
-        if (value !== null) {
-          if (typeof value === 'object') {
-            node.children = this.buildTreeView(value);
-          } else {
-            node.type = this.parsePrimitiveType(value);
-            node.value = value;
-          }
+        if (isObject(value)) {
+          node.type = 'object';
+          node.children = this.buildTreeView(value);
+        } else {
+          node.type = this.parsePrimitiveType(value);
+          node.value = value;
         }
 
         return accumulator.concat(node);
@@ -71,13 +74,17 @@ export class TreeComponent implements OnInit {
 
   private parsePrimitiveType(value): string {
     const type = typeof value;
+
+    if (!isPrimitive(type)) {
+      throw Error(`${type} is not primitive type.`)
+    }
     switch (type) {
       case 'boolean':
       case 'number':
       case 'string':
         return type;
       default:
-        throw Error(`Type ${type} is not supported.˛`);
+        throw Error(`Type ${type} is not supported.`);
     }
   }
 }

@@ -1,5 +1,5 @@
 export default {
-    "a": ["Hello, World!"],
+    "a": ["Hello", "World!"],
     "b": {
         "c": {
             "d": {
