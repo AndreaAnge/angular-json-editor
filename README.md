@@ -24,8 +24,8 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
     - `/demo` - DemoModule (imports TreeModule) with DemoComponent demonstrating Tree View/Editor.
 
 ## Features
-1. Checkbox selection - user can select/check any tree node. Child nodes are coupled with parent meaning if all child nodes are selected,   parent node will be selected as well. 
-2. Remove selected nodes - after nodes are marked/checked (for deletion), user can click REMOVE button to remove nodes from tree.
+1. Checkbox selection - user can select/check any tree node. Child nodes are coupled with parent meaning if parent is selected, its          children will be selected as well.
+2. Remove selected nodes - after nodes are marked/checked (for deletion), user can click REMOVE button to remove nodes from tree. All selected nodes will be removed from tree in one action.
 
 ## To Do
 1. Validate against schema.
