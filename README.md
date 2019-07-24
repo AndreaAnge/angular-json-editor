@@ -2,6 +2,8 @@ Angular Json Viewer/Editor.
 
 Working with latest Angular 8.
 
+Work In Progress!
+
 # TreeviewEditor
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.6.
